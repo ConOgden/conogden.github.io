@@ -8,19 +8,20 @@
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: teal;
+			background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49g_Pjr17vXvybSGA1gxS_U7I5j8x05VvJFVpC86yIL-3hHyLp5UIpQUohF3XexAOzS8:https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/65282199-9f85-4daa-bcd6-de2f615bcca7/dfkc53u-4a5ae6b0-fbc3-4a75-b376-100669ce4eec.png/v1/fill/w_1280,h_1280,q_80,strp/dark_fantasy_knight_version_7_by_pm_artistic_dfkc53u-fullview.jpg%3Ftoken%3DeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcLzY1MjgyMTk5LTlmODUtNGRhYS1iY2Q2LWRlMmY2MTViY2NhN1wvZGZrYzUzdS00YTVhZTZiMC1mYmMzLTRhNzUtYjM3Ni0xMDA2NjljZTRlZWMucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.PcCtW3WMkSJYQbNrlxiVFGHheDUrgMhOKm1boQ1zj8c&usqp=CAU);
 			font-size: 300%;
 			text-align: center;
 			user-select: none;
 			display: block;
 			position: absolute;
 			top: 100px;
-			left: 0px;  /* <--- Change me! */
+			left: 20px;  /* <--- Change me! */
 		}
 		.board{
 			height: 100vh;
+		background-image:  url(https://static.nationalgeographic.co.uk/files/styles/image_3200/public/knights17.jpg?w=1600&p=left)
 		}
-	</style>
+		</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 </head>
@@ -48,7 +49,7 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX ) {
 				box.css("left", newPositionX);
 			}
 
@@ -63,6 +64,10 @@
 			
 			// TODO 2 - Variable declarations 
 			var positionX = 0;
+			var points = 0;
+			var speed = 10;
+			var positionY;
+		
 
 			
 			/* 
@@ -71,8 +76,14 @@
 			turn it around! 
 			*/
 			function update() {
-				positionX = positionX + 10;
+				positionX = positionX + speed;
 				moveBoxTo(positionX);
+				if( positionX > boardWidth){
+					speed = -speed;
+				}
+				if (positionX < 0){
+					speed = -speed
+				}
 
 			};
 
@@ -84,6 +95,14 @@
 			function handleBoxClick() {
 				console.log(positionX)
 				positionX = 0;
+				changeBoxText(points);
+				points = points +1
+				if (speed > 0){
+					speed = speed + 3
+				}
+				if (speed < 0){
+					speed = speed - 3
+				}
 				// Reassigning the positionX variable to 0 so that the box will move back to the left side of the screen
 
 			};
